@@ -10,5 +10,5 @@
 #SBATCH -o %j.out
 #SBATCH -e err.%j
 
-module add tensorflow
-python ./Segment_Images.py '/nas/longleaf/home/emae/keras_unet_models/keras_unet_model_cell_segmenter_02152023_3trainingsets_varyingcontrasts_1024x1024imagesize' '/proj/telston_lab/projects/data/2023_03_30_softgel_s1' 'membrane'
+module add tensorflow_py3/2.1.0
+python ./Segment_Images.py '/proj/telston_lab/projects/data/2023_03_30_softgel_s1' '/nas/longleaf/home/emae/keras_unet_models/keras_unet_model_cell_segmenter_02152023_3trainingsets_varyingcontrasts_1024x1024imagesize' 'membrane'

@@ -12,11 +12,11 @@ from tensorflow.keras import optimizers
 ####################################
 #Arguments taken from command line when running this script which can be found in the corresponding .sh files
 
-#path where keras model is saved
-model_save_path = str(sys.argv[1])
-
 #path where preprocessed images are located to be segmented
-input_dir = str(sys.argv[2])
+input_dir = str(sys.argv[1])
+
+#path where keras model is saved
+model_save_path = str(sys.argv[2])
 
 #path where to save segmented images 
 mask_type = str(sys.argv[3])
