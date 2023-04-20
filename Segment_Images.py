@@ -15,13 +15,17 @@ from tensorflow.keras import optimizers
 #path where preprocessed images are located to be segmented
 input_dir = str(sys.argv[1])
 
-#path where keras model is saved
-model_save_path = str(sys.argv[2])
+#path to model folder (keras_unet_models)
+path_to_model_dir = str(sys.argv[2])
+
+#name of saved keras model
+model_name = str(sys.argv[3])
 
 #path where to save segmented images 
-mask_type = str(sys.argv[3])
+mask_type = str(sys.argv[4])
 ####################################
 
+model_save_path = path_to_model_dir + '/' + model_name
 
 #call our trained model "loaded_model" and load it 
 loaded_model = keras.models.load_model(model_save_path)
