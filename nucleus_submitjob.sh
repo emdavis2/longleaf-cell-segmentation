@@ -11,4 +11,4 @@
 #SBATCH -e err.%j
 
 module add tensorflow_py3/2.1.0
-python ./Segment_Images.py '/proj/telston_lab/projects/data/2023_03_30_softgel_s1' '/nas/longleaf/home/emae/Segmentation/keras_unet_models' 'keras_unet_model_nucleus_segmenter_02152023_3trainingsets_varyingcontrasts_1024x1024imagesize' 'nucleus'
+python ./Segment_Images.py '/proj/telston_lab/projects/data/2023_03_30_softgel_s1' '/proj/telston_lab/projects/keras_unet_models/keras_unet_model_nucleus_segmenter_02152023_3trainingsets_varyingcontrasts_1024x1024imagesize' 'nucleus'
