@@ -9,18 +9,35 @@ The file `Segment_Images.py` is a python script that uses a CNN model saved with
 
 `membrane_submitjob.sh` is a SLURM job submission script to use the pretrained keras membrane CNN model to segment membrane and `nucleus_submitjob.sh` is a SLURM job submission script to use the pretrained keras nucleus CNN model to segment nucleus. Before running these files, the second string in the last line needs to be changed to denote the path to where the preprocessed images are located.
 
+`keras_unet_models` is a folder that contains the trained CNN models (saved with keras) which are used to segment the cell membrane and cell nucleus. There are 2 models in this folder: one for membrane and one for nucleus.
+
 ## Set up to run code:
-Clone this repository and place it in your home directory on the Longleaf cluster.
+Clone this repository to your home directory on the Longleaf cluster. To run segmentation, you must have access to the GPU partition on Longleaf. If you do not already have access to the Longleaf GPUs, email research@unc.edu to request access.
 
-Before running the code, a conda environment needs to be created which can be done via the .yml file. Additionally, you must make sure 
+Within the `.sh` slurm job submission scripts, there is just two attributes that needs to be modified at setup: your email and the path to the `keras_unet_models` folder (which will depend on where you cloned this repository to on your home directory). Enter your email on the line `#SBATCH --mail-user=` to receive emails when your job runs, finishes running, or fails. Next, enter the path to the `keras_unet_models` folder in the second argument after `python ./Segment_Images.py`. Make sure to do this for both `membrane_submitjob.sh` and `nucleus_submitjob.sh`. *Note: the first argument is the path to the directory where the DIC images are located, the second argument is the path to the `keras_unet_models` folder, the thrid argument is the name of the model to apply, and lastly is the feature of interest to segment.*
 
-## How to Run:
-Clone this repository and place it in your home directory on the Longleaf cluster.
+## Workflow for a dataset:
+### Step 1: Preprocessing
+
+The first step for image segmentation will be to run the `PreprocessImages.ipynb` notebook to preprocess the images. To do this, log on to OnDemand (<https://help.rc.unc.edu/ondemand>) and open the Jupyter Notebook application. You will be prompted to enter some parameters for your interactive session. For time, I recommend entering 5 hours and for Additional Job Submission Arguments I recommend requesting 50gb of memory (this would be typed as `--mem=50gb`). For number of CPU, just enter 1. You can now click launch and your request will be sent through on the queue (usually doesn't take long, but it does depend on the amount of resources you request). Once your session is started you can click "connect to Jupyter" and it will launch to the launcher homepage. On the left hand side you should see directories in your home directory on Longleaf (if you did not enter a path in the Jupyter startup directory field when requesting the session). Navigate to where this repo is cloned and open `PreprocessImages.ipynb`. Make sure the Python 3 (ipykernal) is selected for the kernal (that should be the default).
+
+There are only 3 variables that need to be changed within this notebook: `image_path` (located in code block 2), `min_val` and `max_val` (both located in code block 5). `image_path` is the path to where the images you wish to preprocess are located on the Longleaf cluster. `min_val` and `max_val` are variables that you need to enter based upon the histogram of image intensites generated in code block 4. The output of this notebook is images that are resaved in the appropriate format in the same location from which they were located originally (CAUTION: the original images will be rewritten).
+
+### Step2: Segmentation
+
+Once you have the preprocessed images, they are now ready for segmentation. Log into Longleaf and navigate to the directory where this cloned repo is located. To segment, there is only 1 attribute that needs to be changed in both `membrane_submitjob.sh` and `nucleus_submitjob.sh`: the first argument after `python ./Segment_Images.py`, which is the path to the images. Simply change this path to the appropriate path of where the preprocessed images you wish to segment are located. To segment the cell membrane, simply type 
 
 ```
 sbatch membrane_submitjob.sh
-```
+``` 
+
+into the command line (make sure once again you are in the directory of this cloned repo for this command to work). Similarly, to segment cell nucleus, type
 
 ```
 sbatch nucleus_submitjob.sh
 ```
+
+ You can segment both membrane and nucleus at the same time by entering the commands back to back
+
+
+
