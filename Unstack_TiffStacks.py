@@ -25,7 +25,7 @@ movie_names=os.listdir(movies_path)
 movie_names.sort()
 
 #loop through tiff stacks and save individual frames in specified saving path 
-for mov_num, movie in enumerate(movie_names[0:2]):
+for mov_num, movie in enumerate(movie_names):
     mov = imread(movies_path + '/' + movie)
     for frame in range(1,np.shape(mov)[0]+1):
         imsave(reformat_folder_path + '/' + ntpath.basename(reformat_folder_path) +'_s{}_t{}.tif'.format(mov_num, frame), mov[frame-1],check_contrast=False)
