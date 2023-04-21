@@ -9,7 +9,7 @@ The file `Segment_Images.py` is a python script that uses a CNN model saved with
 
 `membrane_submitjob.sh` is a SLURM job submission script to use the pretrained keras membrane CNN model to segment membrane and `nucleus_submitjob.sh` is a SLURM job submission script to use the pretrained keras nucleus CNN model to segment nucleus. Before running these files, the second string in the last line needs to be changed to denote the path to where the preprocessed images are located.
 
-`keras_unet_models` is a folder that contains the trained CNN models (saved with keras) which are used to segment the cell membrane and cell nucleus. There are 2 models in this folder: one for membrane and one for nucleus.
+A required folder is `keras_unet_models`, as it contains the trained CNN models (saved with keras) which are used to segment the cell membrane and cell nucleus. There are 2 models in this folder: one for membrane and one for nucleus. Currently this folder is located on the following path: `/proj/telston_lab/projects/keras_unet_models`. *Note: You must have access to the `/proj/telston_lab` space to access this folder.*
 
 ## Set up to run code:
 Clone this repository to your home directory on the Longleaf cluster. To run segmentation, you must have access to the GPU partition on Longleaf. If you do not already have access to the Longleaf GPUs, email research@unc.edu to request access.
@@ -25,7 +25,7 @@ There are only 3 variables that need to be changed within this notebook: `image_
 
 ### Step2: Segmentation
 
-Once you have the preprocessed images, they are now ready for segmentation. Log into Longleaf and navigate to the directory where this cloned repo is located. To segment, there is only 1 attribute that needs to be changed in both `membrane_submitjob.sh` and `nucleus_submitjob.sh`: the first argument after `python ./Segment_Images.py`, which is the path to the images. Simply change this path to the appropriate path of where the preprocessed images you wish to segment are located. *Note: the first argument is the path to the directory where the DIC images are located, the second argument is the path to the `keras_unet_models` folder, the thrid argument is the name of the model to apply, and lastly is the feature of interest to segment.* To segment the cell membrane, simply type: 
+Once you have the preprocessed images, they are now ready for segmentation. Log into Longleaf and navigate to the directory where this cloned repo is located. To segment, there is only 1 attribute that needs to be changed in both `membrane_submitjob.sh` and `nucleus_submitjob.sh`: the first argument after `python ./Segment_Images.py`, which is the path to the images. Simply change this path to the appropriate path of where the preprocessed images you wish to segment are located. *Note: the first argument is the path to the directory where the DIC images are located, the second argument is the path to the saved keras model to apply in the `keras_unet_models` folder, the thrid argument is the feature of interest to segment.* To segment the cell membrane, simply type: 
 
 ```
 sbatch membrane_submitjob.sh
