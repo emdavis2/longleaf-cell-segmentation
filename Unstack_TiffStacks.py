@@ -16,7 +16,7 @@ movies_path = str(sys.argv[1])
 folder_name = str(sys.argv[2])
 ####################################
 
-#make directory to store unstacked movies
+#make directory to store unstacked movies - makes it in a folder called "reformatted" in the /proj/telston_lab/projects/data directory
 reformat_folder_path = '/proj/telston_lab/projects/data/reformatted/' + folder_name
 os.mkdir(reformat_folder_path)
 
