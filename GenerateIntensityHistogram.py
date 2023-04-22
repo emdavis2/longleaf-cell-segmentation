@@ -10,6 +10,7 @@ import ntpath
 #Arguments taken from command line when running this script which can be found in the corresponding .sh files
 image_path = str(sys.argv[1])
 
+#Path where to save histogram of image intensities 
 fig_savepath = str(sys.argv[2])
 ####################################
 
