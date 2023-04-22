@@ -20,8 +20,11 @@ folder_name = str(sys.argv[2])
 reformat_folder_path = '/proj/telston_lab/projects/data/reformatted/' + folder_name
 os.mkdir(reformat_folder_path)
 
-#get name of all tiff stacks in movies_path folder and sort them numerically
+#get name of all tiff stacks in movies_path folder
 movie_names=os.listdir(movies_path)
+#filter out filenames that are not .tif files
+movie_names = list(filter(lambda file: file[-4:] == '.tif', movie_names))
+#sort filenames numerically
 movie_names.sort()
 
 #loop through tiff stacks and save individual frames in specified saving path 
