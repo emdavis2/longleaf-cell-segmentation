@@ -8,4 +8,4 @@
 #SBATCH -o %j.out
 #SBATCH -e err.%j
 
-python ./GenerateIntensityHistorgram.py '/proj/telston_lab/projects/data/reformatted/2023_04_19_Glass' '/nas/longleaf/home/emae/Segmentation/figures'
+python ./GenerateIntensityHistogram.py '/proj/telston_lab/projects/data/reformatted/2023_04_19_Glass' '/nas/longleaf/home/emae/Segmentation/figures'
