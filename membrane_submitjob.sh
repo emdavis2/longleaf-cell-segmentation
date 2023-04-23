@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --ntasks=1
 #SBATCH --time=10:00:00
-#SBATCH --mem=50g
+#SBATCH --mem=40g
 #SBATCH -p gpu
 #SBATCH --qos gpu_access
 #SBATCH --gres=gpu:1
