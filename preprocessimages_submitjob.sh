@@ -8,4 +8,4 @@
 #SBATCH -o %j.out
 #SBATCH -e err.%j
 
-python ./PreprocessImages.py '/proj/telston_lab/projects/data/reformatted/2023_04_19_Glass' 8000 15000
+python ./PreprocessImages.py '/proj/telston_lab/projects/data/reformatted/2023_04_19_Glass' 8000 17000
