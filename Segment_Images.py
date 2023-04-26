@@ -35,7 +35,7 @@ imagenames=os.listdir(input_dir)
 #filter out filenames that are not .tif files
 imagenames = list(filter(lambda file: file[-4:] == '.tif', imagenames))
 #filter out movies that do not contain the movie_num from argument input
-imagenames = list(filter(lambda file: '_s{}_'.format(movie_num), imagenames))
+imagenames = list(filter(lambda file: '_s{}_'.format(movie_num) in file, imagenames))
 #sort filenames numerically
 imagenames.sort()
 
