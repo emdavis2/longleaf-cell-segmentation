@@ -15,11 +15,14 @@ from tensorflow.keras import optimizers
 #path where preprocessed images are located to be segmented
 input_dir = str(sys.argv[1])
 
+#movie number to segment from input_dir
+movie_num = str(sys.argv[2])
+
 #path to saved keras model
-model_save_path = str(sys.argv[2])
+model_save_path = str(sys.argv[3])
 
 #path where to save segmented images 
-mask_type = str(sys.argv[3])
+mask_type = str(sys.argv[4])
 ####################################
 
 
@@ -29,6 +32,12 @@ loaded_model = keras.models.load_model(model_save_path)
 
 #lists all the files that are within imagesfolder and stores them in a variable called "imagenames"
 imagenames=os.listdir(input_dir)
+#filter out filenames that are not .tif files
+imagenames = list(filter(lambda file: file[-4:] == '.tif', imagenames))
+#filter out movies that do not contain the movie_num from argument input
+imagenames = list(filter(lambda file: '_s{}_'.format(movie_num), imagenames))
+#sort filenames numerically
+imagenames.sort()
 
 
 
@@ -36,7 +45,7 @@ imagenames=os.listdir(input_dir)
 input_img_paths = sorted(
     [
         os.path.join(input_dir, fname)
-        for fname in os.listdir(input_dir)
+        for fname in imagenames 
         if fname.endswith(".tif")
     ]
 )
@@ -89,7 +98,8 @@ val_preds = loaded_model.predict(val_gen)
 
 #make directory to store masks
 mask_folder_path = input_dir + '/' + mask_type + '_masks'
-os.mkdir(mask_folder_path)
+if not os.path.exists(mask_folder_path):
+    os.mkdir(mask_folder_path)
 
 
 #save masks to folder
