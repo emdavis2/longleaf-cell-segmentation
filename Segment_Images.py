@@ -1,13 +1,10 @@
-#Import libraries
-
-import os
-import sys
-import numpy as np
-import ntpath
-
-from tensorflow.keras.preprocessing.image import load_img
 from tensorflow import keras
 from tensorflow.keras import optimizers
+from tensorflow.keras.preprocessing.image import load_img
+import os
+import numpy as np
+import ntpath
+import sys
 
 ####################################
 #Arguments taken from command line when running this script which can be found in the corresponding .sh files
@@ -19,15 +16,21 @@ input_dir = str(sys.argv[1])
 movie_num = str(sys.argv[2])
 
 #path to saved keras model
-model_save_path = str(sys.argv[3])
+model_save_path_json = str(sys.argv[3])
+
+model_save_path_weights = str(sys.argv[4])
 
 #path where to save segmented images 
-mask_type = str(sys.argv[4])
+mask_type = str(sys.argv[5])
 ####################################
 
+with open(model_save_path_json) as json_file:
+  json_config = json_file.read()
+loaded_model = keras.models.model_from_json(json_config)
 
-#call our trained model "loaded_model" and load it 
-loaded_model = keras.models.load_model(model_save_path)
+# Load weights
+loaded_model.load_weights(model_save_path_weights)
+
 
 
 #lists all the files that are within imagesfolder and stores them in a variable called "imagenames"
@@ -88,12 +91,11 @@ num_classes = 2
 #number of images to feed in at a time
 batch_size = 1
 
-
-
 #get data into the format needed to feed into the CNN ("val_gen")
 #get the binary masks for the images ("val_preds")
 val_gen = CellSegmenter(batch_size, img_size, input_img_paths[:])
 val_preds = loaded_model.predict(val_gen)
+
 
 
 #make directory to store masks
