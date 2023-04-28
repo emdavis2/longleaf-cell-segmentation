@@ -1,3 +1,5 @@
+#!/bin/bash
+
 ## Set the DATA_PATH to the directory you want the job to run in.
 ##
 ## On the singularity command line, replace ./test.py with your program
