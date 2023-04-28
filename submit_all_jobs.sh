@@ -2,5 +2,6 @@
 
 for i in {6..36}
 do
-sbatch run_test.slurm $i
+sbatch membrane_submitjob.sh $i
+sbatch nucleus_submitjob.sh $i
 done
