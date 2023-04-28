@@ -29,7 +29,7 @@ SIMG_PATH=/nas/longleaf/apps/tensorflow_py3/2.3.1/simg
 SIMG_NAME=tensorflow2.3.1-py3-cuda10.1-ubuntu18.04.simg
 
 # Set data path
-DATA_PATH=/nas/longleaf/home/emae/Segmentation/test
+DATA_PATH=/nas/longleaf/home/emae/Segmentation
 
 # GPU with Singularity
 singularity exec --nv -B /pine -B /proj $SIMG_PATH/$SIMG_NAME bash -c "cd $DATA_PATH; python ./Segment_Images.py '/proj/telston_lab/projects/data/reformatted/2023_04_19_Glass' $1 '/nas/longleaf/home/emae/keras_unet_models/membrane/keras_unet_model_transfer_cell_segmenter_04262023_1024x1024imagesize_model_config.json' '/nas/longleaf/home/emae/keras_unet_models/membrane/keras_unet_model_transfer_cell_segmenter_04262023_1024x1024imagesize_weights_only.h5' 'membrane'"
