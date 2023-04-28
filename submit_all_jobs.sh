@@ -3,5 +3,7 @@
 for i in {6..36}
 do
 sbatch membrane_submitjob.sh $i
+sleep 0.3
 sbatch nucleus_submitjob.sh $i
+sleep 0.3
 done
