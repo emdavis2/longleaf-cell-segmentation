@@ -1,6 +1,6 @@
 #!/bin/bash
 
-IMG_PATH = '/proj/telston_lab/projects/data/reformatted/2023_04_19_StiffGel'
+IMG_PATH='/proj/telston_lab/projects/data/reformatted/2023_04_19_StiffGel'
 
 for i in {0..35}
 do
