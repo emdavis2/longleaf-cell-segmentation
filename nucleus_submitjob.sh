@@ -29,4 +29,4 @@ SIMG_NAME=tensorflow2.3.1-py3-cuda10.1-ubuntu18.04.simg
 DATA_PATH=/nas/longleaf/home/emae/Segmentation
 
 # GPU with Singularity
-singularity exec --nv -B /pine -B /proj $SIMG_PATH/$SIMG_NAME bash -c "cd $DATA_PATH; python ./Segment_Images.py $2 $1 '/proj/telston_lab/projects/keras_unet_models/nucleus/keras_unet_model_transfer_nucleus_segmenter_04262023_1024x1024imagesize_model_config.json' '/proj/telston_lab/projects/keras_unet_models/nucleus/keras_unet_model_transfer_nucleus_segmenter_04262023_1024x1024imagesize_weights_only.h5' 'nucleus'"
+singularity exec --nv -B /pine -B /proj $SIMG_PATH/$SIMG_NAME bash -c "cd $DATA_PATH; python ./Segment_Images.py $2 $1 '/proj/telston_lab/projects/keras_unet_models/nucleus/keras_unet_model_transfer_nucleus_segmenter_06302023_1024x1024imagesize_model_config.json' '/proj/telston_lab/projects/keras_unet_models/nucleus/keras_unet_model_transfer_nucleus_segmenter_06302023_1024x1024imagesize_weights_only.h5' 'nucleus'"
