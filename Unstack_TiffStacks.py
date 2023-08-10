@@ -20,6 +20,10 @@ folder_name = str(sys.argv[2])
 reformat_folder_path = '/proj/telston_lab/projects/data/reformatted/' + folder_name
 os.mkdir(reformat_folder_path)
 
+#make directory to store unstacked movies - makes it in a folder called "reformatted" in the /proj/telston_lab/projects/data directory
+bead_folder_path = '/proj/telston_lab/projects/data/reformatted/' + folder_name + '/beads'
+os.mkdir(bead_folder_path)
+
 #get name of all tiff stacks in movies_path folder
 movie_names=os.listdir(movies_path)
 #filter out filenames that are not .tif files
@@ -33,6 +37,7 @@ for mov_num, movie in enumerate(movie_names):
     if len(np.shape(mov)) > 3:
         for frame in range(1,np.shape(mov)[0]+1):
             imsave(reformat_folder_path + '/' + ntpath.basename(reformat_folder_path) +'_s{}_t{}.tif'.format(mov_num+1, frame), mov[frame-1][1],check_contrast=False)
+            imsave(bead_folder_path + '/' + ntpath.basename(reformat_folder_path) +'_s{}_t{}.tif'.format(mov_num+1, frame), mov[frame-1][0],check_contrast=False)
     else:
         for frame in range(1,np.shape(mov)[0]+1):
             imsave(reformat_folder_path + '/' + ntpath.basename(reformat_folder_path) +'_s{}_t{}.tif'.format(mov_num+1, frame), mov[frame-1],check_contrast=False)
