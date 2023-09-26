@@ -22,6 +22,11 @@ model_save_path_weights = str(sys.argv[4])
 
 #path where to save segmented images 
 mask_type = str(sys.argv[5])
+
+#size to resize images to (height first, then width)
+img_height = int(sys.argv[6]) #img height
+img_width = int(sys.argv[7]) #img width
+
 ####################################
 
 with open(model_save_path_json) as json_file:
@@ -85,7 +90,8 @@ class CellSegmenter(keras.utils.Sequence):
 
 
 #size to resize the images to
-img_size = (1024, 1024)
+#img_size = (1024, 1024)
+img_size = (img_height, img_width)
 #number of classifications (1=cell or nuclues [depending on what you are segmenting], 0=background)
 num_classes = 2
 #number of images to feed in at a time
