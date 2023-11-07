@@ -8,4 +8,4 @@
 #SBATCH -o %j.out
 #SBATCH -e err.%j
 
-python ./Unstack_TiffStacks.py '/proj/telston_lab/projects/data/2023_04_19_Glass/DIC' '2023_04_19_Glass'
+python ./Unstack_TiffStacks.py '/proj/telston_lab/projects/data/2023_04_19_Glass/DIC' '/proj/telston_lab/projects/data/reformatted/2023_04_19_Glass' 0
